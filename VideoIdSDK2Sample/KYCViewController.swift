@@ -1,0 +1,66 @@
+//
+//  KYCViewController.swift
+//  VideoIdSDK2Sample
+//
+//  Created by Amol Deshmukh on 29/04/22.
+//
+
+import UIKit
+import IDentityVideoIdSDK
+import SelfieCaptureVideoId
+import IDCaptureVideoId
+
+class KYCViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    //MARK: - Step-3: SDK Core Functions
+    @IBAction func CompleteKYC(_ sender:Any) {
+        
+        // Start Enroll Customer with personalData & the default options, presenting it from view controller(self)
+        let commonCustomerData = CommonCustomerDataRequest()
+        let personalData = PersonalCustomerCommonRequestEnrollData(uniqueNumber: "1234")
+        let options = AdditionalCustomerWFlagCommonData()
+
+        IDentitySDK.idValidationAndCustomerEnroll(from: self, customerDataOptions: commonCustomerData, personalData: personalData, options: options) { result in
+            switch result {
+            case .success(let customerEnrollResult):
+                
+                //1. Show Client Side Extracted Data on View
+                let resultForIdVerificationCustomView = ResultScreenFor50(frame: self.view.bounds, customerEnroll_Result: customerEnrollResult)
+                resultForIdVerificationCustomView.delegate = self
+                resultForIdVerificationCustomView.tag = 1
+                self.view.addSubview(resultForIdVerificationCustomView)
+
+                
+            case .failure(let error):
+                //5. Handle SDK Side Local API Error
+                self.displayAlert(title: "Error", Message: error.localizedDescription)
+            }
+        }
+        
+    }
+    
+}
+
+//MARK: - Done Button Delegate
+extension KYCViewController : ResultScreenFor50Delegate {
+    
+    func doneButtonPressed() {
+        if let viewWithTag = self.view.viewWithTag(1){
+            viewWithTag.removeFromSuperview()
+        }
+    }
+    
+    func displayAlert(title : String, Message:String){
+        let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+
+}
