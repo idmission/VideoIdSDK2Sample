@@ -144,10 +144,10 @@ extension ViewController {
         IDCapture.colors.retryScreenBackgroundColor = .white
         IDCapture.colors.retryScreenLabelTextColor = .black
         IDCapture.colors.retryScreenImageTintColor = .green
-        IDCapture.colors.retryScreenButtonTextColor = .green
-        IDCapture.colors.retryScreenButtonBackgroundColor = .clear
+        IDCapture.colors.retryScreenRetryButtonTextColor = .green
+        IDCapture.colors.retryScreenRetryButtonBackgroundColor = .clear
         IDCapture.fonts.retryScreenLabelFont = UIFont.systemFont(ofSize: 16)
-        IDCapture.fonts.retryScreenButtonFont = UIFont.systemFont(ofSize: 14)
+        IDCapture.fonts.retryScreenRetryButtonFont = UIFont.systemFont(ofSize: 14)
 
         //SelfieCapture Customization
         SelfieCapture.options.minFaceWidth = 0.6
@@ -199,10 +199,10 @@ extension ViewController {
         SelfieCapture.colors.retryScreenBackgroundColor = .white
         SelfieCapture.colors.retryScreenLabelTextColor = .black
         SelfieCapture.colors.retryScreenImageTintColor = .blue
-        SelfieCapture.colors.retryScreenButtonTextColor = .blue
-        SelfieCapture.colors.retryScreenButtonBackgroundColor = .clear
+        SelfieCapture.colors.retryScreenRetryButtonTextColor = .blue
+        SelfieCapture.colors.retryScreenRetryButtonBackgroundColor = .clear
         SelfieCapture.fonts.retryScreenLabelFont = UIFont.systemFont(ofSize: 16)
-        SelfieCapture.fonts.retryScreenButtonFont = UIFont.systemFont(ofSize: 14)
+        SelfieCapture.fonts.retryScreenRetryButtonFont = UIFont.systemFont(ofSize: 14)
 
     }
 }
