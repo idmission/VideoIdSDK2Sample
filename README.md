@@ -25,17 +25,18 @@ The IDmission IDentity SDK is a comprehensive toolkit that enables the use of an
 
 
 
-| Feature/Flavours |  **IdentityVideoID SDK**  |  **Identity SDK**  |  **IdentityMedium SDK**  |
-|:------|:------:|:------:|:------:|
-|**1. Document Detect**           |On Device|On Device|On Device|
-|**2. Rotate, crop etc.**         |On Device|On Device|On Server|
-|**3. Document Realness**         |On Device|On Device|On Server|
-|**4. Document Classification**   |On Device|On Device|On Server|
-|**5. MRZ/Barcode reading**       |On Device|On Device|On Device|
-|**6. OCR from front**            |On Device|On Server|On Server|
-|**7. Face detect**               |On Device|On Device|On Device|
-|**8. Liveness detect**           |On Device|On Device|On Device|
-|**9. Detect hats and sunglasses**|On Device|On Device|On Server|
+| Feature/Flavours |  **IdentityVideoID SDK**  |  **Identity SDK**  |  **IdentityMedium SDK**  |  **IdentityLiveness SDK**  |
+|:------|:------:|:------:|:------:|:------:|
+|**1. Document Detect**           |On Device|On Device|On Device|   N/A   |
+|**2. Rotate, crop etc.**         |On Device|On Device|On Server|   N/A   |
+|**3. Document Realness**         |On Device|On Device|On Server|   N/A   |
+|**4. Document Classification**   |On Device|On Device|On Server|   N/A   |
+|**5. MRZ/Barcode reading**       |On Device|On Device|On Device|   N/A   |
+|**6. OCR from front**            |On Device|On Server|On Server|   N/A   |
+|**7. Face detect**               |On Device|On Device|On Device|On Device|
+|**8. Liveness detect**           |On Device|On Device|On Device|On Device|
+|**8. FaceMask detect**           |On Device|On Device|On Device|   N/A   |
+|**9. Detect hats and sunglasses**|On Device|On Device|On Server|   N/A   |
   
 <br />
 
@@ -48,6 +49,7 @@ The IDmission IDentity SDK is a comprehensive toolkit that enables the use of an
 - [IDentityVideoIdSDK Sample App](https://github.com/Idmission-LLC/VideoIdSDK2Sample)
 - [IDentitySDK Sample App](https://github.com/Idmission-LLC/SDK2Sample)
 - [IDentityMediumSDK Sample App](https://github.com/Idmission-LLC/MediumSDK2Sample)
+- [IDentityLivenessSDK Sample App](https://github.com/Idmission-LLC/LivenessSDK2Sample)
 
 <br />
 
@@ -122,6 +124,12 @@ pod 'SignatureCaptureMedium' (Optional) : If developer required this feature the
 pod 'VoiceCaptureMedium' (Optional) : If developer required this feature they can use this framework.
 ```
 
+- **IDentityLiveness 2.0**  *pod*
+```swift
+pod 'IDentityLivenessSDK2.0'
+pod 'IDentityLivenessModels' (Optional) : If developer wanto to use SDK without models they can skip this framework.
+```
+
 ##### **Add SDK manually :** 
 
 To add IDentitySDK2.0 manually, As per your requirement choose any SDK flavour & download it from below link.
@@ -149,10 +157,15 @@ To add IDentitySDK2.0 manually, As per your requirement choose any SDK flavour &
     - `IDentityMediumSDK.xcframework`
     - `IDCaptureMedium.xcframework`
     - `SelfieCaptureMedium.xcframework`
-    - `IDentityMediumModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.    
+    - `IDentityMediumModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.
     - `SignatureCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
     - `FingerPrintCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
     - `VoiceCaptureMedium.xcframework` (Optional) : If developer required this feature they can use this framework.
+
+- [Download IDentityLivenessSDK2.0](https://drive.google.com/file/d/1X9ahwKrRLGYrgvkPGnjh_XBSSDJbAGik/view?usp=sharing) : Drag & drop following files in your project
+    - `IDentityLivenessSDK.xcframework`
+    - `SelfieCaptureLiveness.xcframework`
+    - `IDentityLivenessModels.xcframework` (Optional) : If developer wanto to use SDK without models they can skip this framework.    
 
 Once added respective `.xcframeworks` in your project, make sure to make it all as a `Embed & Sign` in **YourTarget -> General -> Frameworks, Libraries & and Embeded Content**.
 
@@ -189,6 +202,14 @@ pod 'GoogleMLKit/FaceDetection'
 pod 'GZIP'
 ```
 
+- **IDentityLivenessSDK2.0**  *dependencies*.  
+    
+```swift
+pod 'TensorFlowLiteSwift', '~> 2.7.0'
+pod 'GoogleMLKit/FaceDetection'
+pod 'GZIP'
+```
+
 ### **Step 5:** Steps to reduce size of your app bundle (Optional steps)
 Optionally add the following `post_install` script (replacing `APP_TARGET` with the name of your app target) to the end of your `Podfile` to prevent [CocoaPods](https://cocoapods.org/) from statically-linking the above dependencies to your app binary, unnecessarily increasing the size of your app bundle:  
 
@@ -219,10 +240,10 @@ Run `pod install` to install above mentioned dependencies.
 ### **Step 7:** Add Permissions
 
 - Add an [`NSCameraUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nscamerausagedescription) key to the app's `Info.plist` to allow camera access.  
-- Add an [`NFCReaderUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow NFC reader access.
-- Add an [`NSMicrophoneUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key to the app's `Info.plist` to allow microphone access.
-- Add an [`NSSpeechRecognitionUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key to the app's `Info.plist` to allow speech recognition access.
 - Add an [`NSLocationWhenInUseUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow GPS location access.
+- Add an [`NSSpeechRecognitionUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsspeechrecognitionusagedescription) key to the app's `Info.plist` to allow speech recognition access.
+- Add an [`NSMicrophoneUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nsmicrophoneusagedescription) key to the app's `Info.plist` to allow microphone access.
+- Add an [`NFCReaderUsageDescription`](https://developer.apple.com/documentation/bundleresources/information_property_list/nfcreaderusagedescription) key to the app's `Info.plist` to allow NFC reader access.
 
 ### **Step 8:** Add API Required Reasons
 
@@ -329,7 +350,15 @@ import SignatureCaptureMedium (Its optional framework as per business requiremen
 import FingerPrintCaptureMedium (Its optional framework as per business requirement)
 import VoiceCaptureMedium (Its optional framework as per business requirement)
 ```
-    
+
+- To integrate **IDentityLivenessSDK** import Following frameworks.  
+
+```swift
+//For `IDentityLivenessSDK` flavours import Following Medium SDKs
+import IDentityLivenessSDK
+import SelfieCaptureLiveness
+```
+
     
 As per requirement once you done with importing above frameworks, You need to Call the following SDK Initialization API.
 
@@ -422,7 +451,7 @@ Here 'updateInitialization' is a delegate method & can be used to track the mode
 
 You can do Live face check using following method from a `UIViewController`. If successful, call `submit` to send the result to the server.
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user need to use below API call for `Live Face Check`
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user need to use below API call for `Live Face Check`
 
 ```swift
 // Start live face capture, presenting it from view controller
@@ -660,7 +689,7 @@ The `CommonCustomerDataRequest` & `AdditionalCustomerWFlagCommonData` documentat
 
 For `Enroll Biometric` you need to use below method with personalData & & the default options from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Enroll Biometric`.   
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Enroll Biometric`.   
 
 ```swift
 // Start customer enroll birometric with personalData & the default options, presenting it from view controller(self)
@@ -805,7 +834,7 @@ The `CommonCustomerDataRequest`, `PersonalCustomerCommonRequestEnrollData` & `Ad
 
 For `Customer Verification` you need to use below method with personalData from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Customer Verification Verification`.   
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Customer Verification Verification`.   
 
 ```swift
 // Start Customer Verification with personalData, presenting it from view controller(self)
@@ -845,7 +874,7 @@ Please refer `CommonCustomerDataRequest`, `PersonalCustomerVerifyData` & `Additi
 
 For `Customer Biometric Verification` you need to use below method of from a  `UIViewController`. If successful, call `submit` to send the result to the server.  
 
-  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK**</u> : For all flavours user needs to use below API call method for `Customer Biometric Verification`. 
+  -   <u>**IDentityVideoIdSDK / IDentitySDK  /  IDentityMediumSDK / IDentityLivenessSDK**</u> : For all flavours user needs to use below API call method for `Customer Biometric Verification`. 
   
 ```swift
 // start Customer Biometric Verification, presenting it from view controller(self)
@@ -889,7 +918,7 @@ For `autofill` you need to use below method of from a  `UIViewController`. If su
 ```swift
 // start autofill, presenting it from view controller(self)
 
-IDentitySDK.autofill(from: self) { result in
+IDentitySDK.autofill(from: self, captureIdSide: .front) { result in
     switch result {
         case .success(let autofillResult):
 
@@ -1110,16 +1139,16 @@ IDCapture.strings.notInFocus = "Not in focus"
 IDCapture.strings.documentDetectedHoldStill = "Document detected, hold still..."
 IDCapture.strings.glareDetected = "Move Away From Direct Light"
 IDCapture.strings.removeFinger = "Remove Finger"
-IDCapture.colors.closeButtonTextColor = .black
+IDCapture.colors.backgroundColor = .clear
 IDCapture.colors.closeButtonColor = .white
+IDCapture.colors.closeButtonTextColor = .black
 IDCapture.colors.closeButtonImageTintColor = .white
-IDCapture.colors.successLabelBackgroundColor = .green
-IDCapture.colors.errorLabelBackgroundColor = .red
-IDCapture.colors.successLabelTextColor = .white
 IDCapture.colors.captureLabelColor = .white
 IDCapture.colors.captureLabelTextColor = .clear
+IDCapture.colors.successLabelBackgroundColor = .green
+IDCapture.colors.successLabelTextColor = .white
+IDCapture.colors.errorLabelBackgroundColor = .red
 IDCapture.colors.errorLabelTextColor = .white
-IDCapture.colors.backgroundColor = .clear
 IDCapture.fonts.closeButtonTextFont = UIFont.systemFont(ofSize: 20)
 IDCapture.fonts.captureLabelFont = UIFont.boldSystemFont(ofSize: 14)
 IDCapture.fonts.labelFont = UIFont.systemFont(ofSize: 14)
@@ -1134,16 +1163,18 @@ IDCapture.images.bottomInfoImage = UIImage(named: "IdiInfo")
 IDCapture.strings.instructionScreenText = "Lorem ipsum text"
 IDCapture.strings.instructionScreenButtonText = "Continue"
 IDCapture.colors.instructionScreenBackgroundColor = .white
-IDCapture.colors.instructionScreenTextBackgroundColor = .gray
+IDCapture.colors.instructionScreenBackButtonColor = .orange
 IDCapture.colors.instructionScreenBackButtonImageTintColor = .orange
-IDCapture.colors.instructionScreenImageTintColor = .white
+IDCapture.colors.instructionScreenTextBackgroundColor = .gray
 IDCapture.colors.instructionScreenLabelTextColor = .black
-IDCapture.colors.instructionScreenButtonTextColor = .white
+IDCapture.colors.instructionScreenImageTintColor = .white
 IDCapture.colors.instructionScreenButtonBackgroundColor = .gray
+IDCapture.colors.instructionScreenButtonTextColor = .white
 IDCapture.fonts.instructionScreenLabelFont = UIFont.systemFont(ofSize: 20)
 IDCapture.fonts.instructionScreenButtonFont = UIFont.systemFont(ofSize: 20)
 IDCapture.images.instructionScreenImage = UIImage(named: "IDCaptureImage")
 IDCapture.images.instructionBackButtonImage = UIImage(named: "IDCaptureImage")
+IDCapture.style.instructionScreenContinueButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 25, clipsToBounds: true)
 
 //IDCapture Retry Screen UI Customization
 IDCapture.strings.retryScreenText = "RealID not Detected. Please try again"
@@ -1152,11 +1183,16 @@ IDCapture.strings.cancelButtonText = "Cancel"
 IDCapture.colors.retryScreenBackgroundColor = .white
 IDCapture.colors.retryScreenLabelTextColor = .black
 IDCapture.colors.retryScreenImageTintColor = .green
-IDCapture.colors.retryScreenButtonTextColor = .green
-IDCapture.colors.retryScreenButtonBackgroundColor = .clear
+IDCapture.colors.retryScreenRetryButtonBackgroundColor = .white
+IDCapture.colors.retryScreenRetryButtonTextColor = .black
+IDCapture.colors.retryScreenCancelButtonBackgroundColor = .white
+IDCapture.colors.retryScreenCancelButtonTextColor = .black
 IDCapture.fonts.retryScreenLabelFont = UIFont.systemFont(ofSize: 16)
-IDCapture.fonts.retryScreenButtonFont = UIFont.systemFont(ofSize: 14)
+IDCapture.fonts.retryScreenRetryButtonFont = UIFont.systemFont(ofSize: 14)
+IDCapture.fonts.retryScreenCancelButtonFont = UIFont.systemFont(ofSize: 14)
 IDCapture.images.retryScreenImage = UIImage(named: "IdRetryImage")
+IDCapture.style.retryScreenRetryButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
+IDCapture.style.retryScreenCancelButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
 
 ```
 
@@ -1173,7 +1209,7 @@ SelfieCapture.options.maxRelativeNoseHeight = 0.67
 SelfieCapture.options.labelsConfidenceThreshold = 0.79
 SelfieCapture.options.faceMaskProbabilityThreshold = 0.98
 SelfieCapture.options.liveFaceProbabilityThreshold = 0.9
-SelfieCapture.options.consecutiveFakeFaceLimit = 15
+SelfieCapture.options.consecutiveFakeFaceLimit = 10
 SelfieCapture.options.lightIntensityThreshold = 0.05
 SelfieCapture.options.focusThreshold = 0.2
 SelfieCapture.options.isDebugMode = true
@@ -1207,13 +1243,16 @@ SelfieCapture.strings.capturingFace = "Capturing Face"
 SelfieCapture.strings.tooMuchLight = "Too much light around face"
 SelfieCapture.colors.backgroundColor = .white
 SelfieCapture.colors.overlayTopViewColor = .white
-SelfieCapture.colors.closeButtonTextColor = .black
 SelfieCapture.colors.closeButtonColor = .clear
+SelfieCapture.colors.closeButtonTextColor = .black
 SelfieCapture.colors.closeButtonImageTintColor = .white
+SelfieCapture.colors.captureLabelColor = .white
+SelfieCapture.colors.captureLabelTextColor = .clear
 SelfieCapture.colors.successLabelBackgroundColor = .green
 SelfieCapture.colors.errorLabelBackgroundColor = .red
 SelfieCapture.colors.successLabelTextColor = .white
 SelfieCapture.colors.errorLabelTextColor = .white
+SelfieCapture.fonts.captureLabelFont = UIFont.systemFont(ofSize: 20)
 SelfieCapture.fonts.labelFont = UIFont.systemFont(ofSize: 20)
 SelfieCapture.fonts.closeButtonTextFont = UIFont.systemFont(ofSize: 20)
 SelfieCapture.layout.labelPosition = .top
@@ -1225,16 +1264,18 @@ SelfieCapture.images.bottomInfoImage = UIImage(named: "Selfieinfo")
 SelfieCapture.strings.instructionScreenText = "Lorem ipsum text"
 SelfieCapture.strings.instructionScreenButtonText = "Continue"
 SelfieCapture.colors.instructionScreenBackgroundColor = .white
-SelfieCapture.colors.instructionScreenTextBackgroundColor = .orange
+SelfieCapture.colors.instructionScreenBackButtonColor = .clear
 SelfieCapture.colors.instructionScreenBackButtonImageTintColor = .gray
-SelfieCapture.colors.instructionScreenImageTintColor = .white
+SelfieCapture.colors.instructionScreenTextBackgroundColor = .orange
 SelfieCapture.colors.instructionScreenLabelTextColor = .black
-SelfieCapture.colors.instructionScreenButtonTextColor = .white
+SelfieCapture.colors.instructionScreenImageTintColor = .white
 SelfieCapture.colors.instructionScreenButtonBackgroundColor = .gray
+SelfieCapture.colors.instructionScreenButtonTextColor = .white
 SelfieCapture.fonts.instructionScreenLabelFont = UIFont.systemFont(ofSize: 20)
 SelfieCapture.fonts.instructionScreenButtonFont = UIFont.systemFont(ofSize: 20)
 SelfieCapture.images.instructionScreenImage = UIImage(named: "SelfieCaptureImage")
 SelfieCapture.images.instructionBackButtonImage = UIImage(named: "BackButtonImage")
+SelfieCapture.style.instructionScreenContinueButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 25, clipsToBounds: true)
 
 //SelfieCapture Retry Screen UI Customization
 SelfieCapture.strings.retryScreenText = "Live face not Detected. Please try again"
@@ -1243,11 +1284,16 @@ SelfieCapture.strings.cancelButtonText = "Cancel"
 SelfieCapture.colors.retryScreenBackgroundColor = .white
 SelfieCapture.colors.retryScreenLabelTextColor = .black
 SelfieCapture.colors.retryScreenImageTintColor = .blue
-SelfieCapture.colors.retryScreenButtonTextColor = .blue
-SelfieCapture.colors.retryScreenButtonBackgroundColor = .clear
+SelfieCapture.colors.retryScreenRetryButtonBackgroundColor = .white
+SelfieCapture.colors.retryScreenRetryButtonTextColor = .black
+SelfieCapture.colors.retryScreenCancelButtonBackgroundColor = .white
+SelfieCapture.colors.retryScreenCancelButtonTextColor = .black
 SelfieCapture.fonts.retryScreenLabelFont = UIFont.systemFont(ofSize: 20)
-SelfieCapture.fonts.retryScreenButtonFont = UIFont.systemFont(ofSize: 20)
+SelfieCapture.fonts.retryScreenRetryButtonFont = UIFont.systemFont(ofSize: 14)
+SelfieCapture.fonts.retryScreenCancelButtonFont = UIFont.systemFont(ofSize: 14)
 SelfieCapture.images.retryScreenImage = UIImage(named: "SelfieRetryImage")
+SelfieCapture.style.retryScreenRetryButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
+SelfieCapture.style.retryScreenCancelButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
 
 ```
 
@@ -1296,15 +1342,18 @@ DocumentCapture.images.bottomInfoImage = UIImage(named: "IdiInfo")
 DocumentCapture.strings.instructionScreenText = "Lorem ipsum text"
 DocumentCapture.strings.instructionScreenButtonText = "Continue"
 DocumentCapture.colors.instructionScreenBackgroundColor = .blue
+DocumentCapture.colors.instructionScreenBackButtonColor = .clear
 DocumentCapture.colors.instructionScreenBackButtonImageTintColor = .orange
-DocumentCapture.colors.instructionScreenImageTintColor = .white
+DocumentCapture.colors.instructionScreenTextBackgroundColor = .orange
 DocumentCapture.colors.instructionScreenLabelTextColor = .red
-DocumentCapture.colors.instructionScreenButtonTextColor = .green
+DocumentCapture.colors.instructionScreenImageTintColor = .white
 DocumentCapture.colors.instructionScreenButtonBackgroundColor = .yellow
+DocumentCapture.colors.instructionScreenButtonTextColor = .green
 DocumentCapture.fonts.instructionScreenLabelFont = UIFont.systemFont(ofSize: 20)
 DocumentCapture.fonts.instructionScreenButtonFont = UIFont.systemFont(ofSize: 20)
 DocumentCapture.images.instructionScreenImage = UIImage(named: "DocCaptureImage")
 DocumentCapture.images.instructionBackButtonImage = UIImage(named: "BackImage")
+DocumentCapture.style.instructionScreenContinueButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 25, clipsToBounds: true)
 
 //DocumentCapture Retry Screen UI Customization
 DocumentCapture.strings.retryScreenText = "RealID not Detected. Please try again"
@@ -1313,11 +1362,16 @@ DocumentCapture.strings.cancelButtonText = "Cancel"
 DocumentCapture.colors.retryScreenBackgroundColor = .white
 DocumentCapture.colors.retryScreenLabelTextColor = .black
 DocumentCapture.colors.retryScreenImageTintColor = .green
-DocumentCapture.colors.retryScreenButtonTextColor = .green
-DocumentCapture.colors.retryScreenButtonBackgroundColor = .clear
+DocumentCapture.colors.retryScreenRetryButtonBackgroundColor = .white
+DocumentCapture.colors.retryScreenRetryButtonTextColor = .black
+DocumentCapture.colors.retryScreenCancelButtonBackgroundColor = .white
+DocumentCapture.colors.retryScreenCancelButtonTextColor = .black
 DocumentCapture.fonts.retryScreenLabelFont = UIFont.systemFont(ofSize: 16)
-DocumentCapture.fonts.retryScreenButtonFont = UIFont.systemFont(ofSize: 14)
+DocumentCapture.fonts.retryScreenRetryButtonFont = UIFont.systemFont(ofSize: 14)
+DocumentCapture.fonts.retryScreenCancelButtonFont = UIFont.systemFont(ofSize: 14)
 DocumentCapture.images.retryScreenImage = UIImage(named: "IdRetryImage")
+DocumentCapture.style.retryScreenRetryButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
+DocumentCapture.style.retryScreenCancelButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 10, clipsToBounds: true)
 
 ```
 
@@ -1325,6 +1379,7 @@ DocumentCapture.images.retryScreenImage = UIImage(named: "IdRetryImage")
 
 ```swift
 //SignatureCapture Customization
+SignatureCapture.options.isEnableDigitalSignature = true
 SignatureCapture.options.signatureStrokeWidth = 2
 
 //SignatureCapture Screen UI Customization
@@ -1344,6 +1399,9 @@ SignatureCapture.colors.doneButtonTextColor = .white
 SignatureCapture.fonts.titleLabelTextFont = UIFont.systemFont(ofSize: 18)
 SignatureCapture.fonts.clearButtonTextFont = UIFont.systemFont(ofSize: 14)
 SignatureCapture.fonts.doneButtonTextFont = UIFont.systemFont(ofSize: 14)
+SignatureCapture.images.closeButtonImage = UIImage(named: "BackImage")
+SignatureCapture.style.clearButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 25, clipsToBounds: true)
+SignatureCapture.style.doneButton = .style(borderWidth: 2, borderColor: .red, cornerRadius: 25, clipsToBounds: true)
 
 ```
 
@@ -1462,6 +1520,21 @@ VideoCapture.colors.readingTextBackgroundColor = .white
 ```
 
 ## SDK Version History
+
+### **v 11.1.1.2.2 (15 January 2026)**
+- implemented server-side response for Autofill Service.
+- UI Enhancements.
+
+### **v 10.1.24.2.3 (04 December 2025)**
+- Added event logging capability within the SDK
+- Implemented improved handling for token expiration scenarios
+- Updated SDK to ensure compatibility with iOS 26 and Xcode 26
+- Added support for standalone signature capture with Improved UI
+- Integrated the Biometric signature library into the SDK.
+- Enabled more efficient multi-document workflows in custom product
+
+### **v 10.1.18.2.1 (11 November 2025)**
+- Updated the default maximum allowed fake face capture count from 15 to 10.
 
 ### **v 10.1.16.2.2 (25 August 2025)**
 - Updated new encryption and decryption logic.
