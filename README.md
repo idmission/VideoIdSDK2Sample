@@ -292,7 +292,7 @@ Token Generation Sample Request:
 Sample Response - Token Generation:
 ```swift
  {
-    "access_token": "eyJhbGciO....5gNZx03Myb8ZuyY2gu3u-8KgGmULBs9mkPcg",
+    "access_token": "<ACCESS_TOKEN>",
     "expires_in": 18000,
     "refresh_expires_in": 0,
     "token_type": "Bearer",
